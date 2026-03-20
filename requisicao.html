@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Requisição de GLP • Prefeitura Municipal de Mogi Guaçu</title>
+
+  <!-- Bootstrap -->
+  https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css
+
+  <style>
+    body{ background: #f6f9fc; }
+    .card-form{ border:1px solid #e5eaf1; border-radius:12px; box-shadow:0 8px 28px rgba(16,24,40,.08); }
+    .section-title{ font-weight:600; color:#0B2545; }
+    .table-items td, .table-items th { vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar (mesmo padrão das outras páginas) -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <div class="container">
+      dashboard.htmlGLP • PMMG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navGLP">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navGLP">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">secretarias.htmlSecretarias</a></li>
+          <li class="nav-item">locais.htmlLocais</a></li>
+          <li class="nav-item">tipos-carga.htmlTipos de Carga</a></li>
+          <li class="nav-item">usuarios.htmlUsuários</a></li>
+          <li class="nav-item">requisicao.htmlRequisição</a></li>
+        </ul>
+        <span class="navbar-text">Protótipo (HTML estático)</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="card card-form">
+      <div class="card-body p-4">
+
+        <h1 class="h5 mb-3">Requisição de carga de gás G.L.P.</h1>
+
+        #
+          <!-- A) Identificação -->
+          <div class="section-title mb-2">A) Identificação</div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label" for="secretaria">Secretaria</label>
+              <input id="secretaria" class="form-control" value="SECRETARIA DE ADMINISTRAÇÃO" readonly>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="local">Local de entrega</label>
+              <select id="local" class="form-select" required>
+                <option value="">Selecione...</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="endereco">Endereço</label>
+              <input id="endereco" class="form-control" readonly>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label" for="solicitante_nome">Solicitante (nome)</label>
+              <input id="solicitante_nome" class="form-control" value="(login futuro)" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="solicitante_cpf">CPF</label>
+              <input id="solicitante_cpf" class="form-control" placeholder="000.000.000-00" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="solicitante_email">E-mail</label>
+              <input id="solicitante_email" type="email" class="form-control" placeholder="seu.email@pm....gov.br" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="solicitante_fone">Telefone</label>
+              <input id="solicitante_fone" class="form-control" placeholder="(19) 0000-0000">
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="mesmo_receptor">
+                <label class="form-check-label" for="mesmo_receptor">
+                  O requisitante é o responsável pelo recebimento
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label" for="receptor_nome">Recebedor (nome)</label>
+              <input id="receptor_nome" class="form-control" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="receptor_cpf">CPF</label>
+              <input id="receptor_cpf" class="form-control" placeholder="000.000.000-00" required>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label" for="datahora">Data/Hora</label>
+              <input id="datahora" class="form-control" readonly>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="prazo">Prazo previsto (úteis)</label>
+              <input id="prazo" class="form-control" readonly>
+            </div>
+          </div>
+
+          <hr class="my-4"/>
+
+          <!-- B) Itens -->
+          <div class="section-title mb-2">B) Itens</div>
+          <div class="table-responsive">
+            <table class="table table-sm table-items align-middle" id="tabelaItens">
+              <thead class="table-light">
+                <tr>
+                  <th style="width:45%">Tipo de carga</th>
+                  <th style="width:20%">Quantidade</th>
+                  <th style="width:15%">Unidade</th>
+                  <th style="width:20%"></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <button type="button" class="btn btn-outline-primary btn-sm" id="addItem">Adicionar item</button>
+
+          <hr class="my-4"/>
+
+          <!-- C) Justificativa e observações -->
+          <div class="section-title mb-2">C) Justificativa e Observações</div>
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="form-label" for="justificativa">Justificativa</label>
+              <textarea id="justificativa" class="form-control" rows="3" required></textarea>
+              <div class="form-text">Obrigatória acima de um certo volume (regra futura do back‑end).</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="observacoes">Observações</label>
+              <textarea id="observacoes" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 mt-4">
+            <button class="btn btn-primary">Enviar (protótipo)</button>
+            Voltar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap + lógica -->
+  https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js</script>
+  <script>
+    // --- Dados simulados (virão do back-end depois) ---
+    const locais = [
+      { id: 12, nome: "ALMOXARIFADO CENTRAL", endereco: "Av. Paulista, 354, Jardim Centenário, Mogi Guaçu - SP" },
+      { id: 15, nome: "PATRIMÔNIO", endereco: "Av. Paulista, 354, Jardim Centenário, Mogi Guaçu - SP" }
+    ];
+    const tiposCarga = [
+      { id: 1, rotulo: "GLP — P-13", unidade: "un" },
+      { id: 2, rotulo: "GLP — P-45", unidade: "carga" }
+    ];
+
+    // --- Carregar selects ---
+    const selLocal = document.getElementById('local');
+    const inpEndereco = document.getElementById('endereco');
+    locais.forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l.id; opt.textContent = l.nome;
+      selLocal.appendChild(opt);
+    });
+    selLocal.addEventListener('change', () => {
+      const l = locais.find(x => String(x.id) === selLocal.value);
+      inpEndereco.value = l ? l.endereco : '';
+    });
+
+    // --- Data/Hora & Prazo (úteis) ---
+    const inpDataHora = document.getElementById('datahora');
+    const inpPrazo = document.getElementById('prazo');
+    const agora = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    inpDataHora.value = `${pad(agora.getDate())}/${pad(agora.getMonth()+1)}/${agora.getFullYear()} ${pad(agora.getHours())}:${pad(agora.getMinutes())}`;
+
+    // adiciona N dias úteis (ignora feriados por enquanto; back-end usará tabela EVENTOS)
+    function addDiasUteis(date, n=2){
+      let d = new Date(date);
+      let count = 0;
+      while(count < n){
+        d.setDate(d.getDate()+1);
+        const dow = d.getDay(); // 0=Dom, 6=Sáb
+        if(dow !== 0 && dow !== 6) count++;
+      }
+      return d;
+    }
+    const prazoPrev = addDiasUteis(agora, 2);
+    inpPrazo.value = `${pad(prazoPrev.getDate())}/${pad(prazoPrev.getMonth()+1)}/${prazoPrev.getFullYear()}`;
+
+    // --- Recebedor = Solicitante ---
+    const chkMesmo = document.getElementById('mesmo_receptor');
+    const sNome = document.getElementById('solicitante_nome');
+    const sCpf  = document.getElementById('solicitante_cpf');
+    const rNome = document.getElementById('receptor_nome');
+    const rCpf  = document.getElementById('receptor_cpf');
+    chkMesmo.addEventListener('change', () => {
+      if(chkMesmo.checked){
+        rNome.value = sNome.value;
+        rCpf.value  = sCpf.value;
+      }
+    });
+
+    // --- Itens dinâmicos ---
+    const tbody = document.querySelector('#tabelaItens tbody');
+    document.getElementById('addItem').addEventListener('click', addLinha);
+    function addLinha(){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <select class="form-select sel-tipo" required>
+            <option value="">Selecione...</option>
+            ${tiposCarga.map(t => `${t.id}">${t.rotulo}</option>`).join('')}
+          </select>
+        </td>
+        <td>
+          <input type="number" class="form-control inp-quant" min="1" step="1" required>
+        </td>
+        <td>
+          <input class="form-control inp-unid" readonly>
+        </td>
+        <td class="text-end">
+          <button type="button" class="btn btn-outline-danger btn-sm btn-remover">Remover</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+      const sel = tr.querySelector('.sel-tipo');
+      const unid = tr.querySelector('.inp-unid');
+      sel.addEventListener('change', () => {
+        const tc = tiposCarga.find(x => String(x.id) === sel.value);
+        unid.value = tc ? tc.unidade : '';
+      });
+      tr.querySelector('.btn-remover').addEventListener('click', () => tr.remove());
+    }
+    // cria 1 linha inicial
+    addLinha();
+  </script>
+</body>
+</html>
+``
